@@ -11,7 +11,7 @@ import { ShopService } from './shop.service';
   styleUrls: ['./shop.component.scss'],
 })
 export class ShopComponent implements OnInit {
-  @ViewChild('serach',{static: true}) serachTerm: ElementRef;
+  @ViewChild('serach', {static: true}) serachTerm: ElementRef;
   products: IProduct[];
   brands: IBrand[];
   types: IType[];
@@ -52,6 +52,7 @@ export class ShopComponent implements OnInit {
       }
     );
   }
+
   getTypes() {
     this.shopService.getTypes().subscribe(
       (response) => {
@@ -62,32 +63,37 @@ export class ShopComponent implements OnInit {
       }
     );
   }
+
   onBrandSelected(brandId: number) {
      this.shopParams.brandId = brandId;
      this.shopParams.pageNumber = 1;
      this.getProducts();
   }
+
   onTypeSelected(typeId: number) {
     this.shopParams.typeId = typeId;
     this.shopParams.pageNumber = 1;
     this.getProducts();
  }
+
  onSortSelected(sort: string) {
    this.shopParams.sort = sort;
    this.getProducts();
  }
 
- onPageChanged(event: any){
-   if (this.shopParams.pageNumber !== event){
+ onPageChanged(event: any) {
+   if (this.shopParams.pageNumber !== event) {
     this.shopParams.pageNumber = event;
     this.getProducts();
    }
  }
+
  onSearch() {
    this.shopParams.search = this.serachTerm.nativeElement.value;
    this.shopParams.pageNumber = 1;
    this.getProducts();
  }
+
  onReset() {
   this.serachTerm.nativeElement.value = '';
   this.shopParams = new ShopParams();
